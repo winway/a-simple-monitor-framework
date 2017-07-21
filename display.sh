@@ -3,6 +3,11 @@
 
 source ./config.sh
 
-newdir=$(cat "$DATADIR/newest.txt")
+if [[ -f "$DATADIR/newest.txt" ]]
+then
+    newdir=$(cat "$DATADIR/newest.txt")
 
-( cd "$DISPLAYDIR" && ln -Tf -s ".$DATADIR/$WARNDIR/$newdir" new_warning )
+    ( cd "$DISPLAYDIR" && ln -Tf -s ".$DATADIR/$WARNDIR/$newdir" new_warning )
+else
+    echo "No such file: $DATADIR/newest.txt"
+fi
